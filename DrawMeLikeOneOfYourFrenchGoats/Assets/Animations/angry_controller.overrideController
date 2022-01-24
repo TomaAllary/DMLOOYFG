@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: angry_controller
+  m_Controller: {fileID: 9100000, guid: bf780f2c95268af4ea13f7ccfb249942, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: df1dad2ddf2c34343b8d05cb2820fa79, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 51fc1505ce0f9574db8c66b8a816aed4, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: dfedc0938a518a647b51776693161d96, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 45d5f52be10d83f439c95aaff7a3ce9e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d88b5037f3f3f1749a411d6ac9f34278, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 06b0a20ace5e3e14c96b13d9ceab0ef3, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 71c73cab9465d0946ad8f31b1b53efd2, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7790c837370e3a54dafefd072239d73a, type: 2}

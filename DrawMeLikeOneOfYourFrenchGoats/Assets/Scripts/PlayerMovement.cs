@@ -8,33 +8,24 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController2D controller;
     public Camera cam;
     public GameObject goatSurroundings;
-    public Animator deathAnim;
-
-    public AudioSource hurtAudio;
-
-    public AnimatorOverrideController inCrissController;
-    public AnimatorOverrideController happyController;
-
-    public Rigidbody2D[] hunters;
 
     public float runspeed = 40f;
-    public float rageMeter = 0f;
-    public ParticleSystem goatSparkle;
     float horizontalMove = 0f;
     bool isJumping = false;
-    private Animator myAnimator;
-    public HealthBar rageBar;
-    public bool inCriss;
     public bool isRamming;
 
-    private float rageTimer;
+    private Animator myAnimator;
+    public ParticleSystem goatSparkle;
+    public Animator deathAnim;
+    public AudioSource hurtAudio;
+    public Rigidbody2D[] hunters;
 
 
     // Start is called before the first frame update
     void Start()
     {
         myAnimator = GetComponent<Animator>();
-        inCriss = isRamming = false;
+        isRamming = false;
         goatSparkle.gameObject.SetActive(false);
     }
 
@@ -60,31 +51,6 @@ public class PlayerMovement : MonoBehaviour
             myAnimator.SetTrigger("slam");
         }
 
-        if(rageBar.getRageLevel() >= 1)
-        {
-            if (!inCriss) //to call it less often
-            {
-                myAnimator.runtimeAnimatorController = inCrissController;
-                rageTimer = 1;
-                inCriss = true;
-                goatSparkle.gameObject.SetActive(true);
-                controller.m_JumpForce = Constants.goatRageJumpForce;
-            }
-            
-        }
-        else if(rageBar.getRageLevel() <= 0)
-        {
-            if(inCriss) //to call it less often
-                myAnimator.runtimeAnimatorController = happyController;
-            inCriss = false;
-
-            goatSparkle.gameObject.SetActive(false);
-            controller.m_JumpForce = Constants.goatNormalJumpForce;
-        }
-        if(gameObject.GetComponent<CharacterController2D>().looseRage && !inCriss)
-        {
-            rageBar.setHealth(0);
-        }
     }
 
     private void FixedUpdate()
@@ -97,19 +63,6 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, isJumping);
         isJumping = false;
 
-        if (inCriss)
-        {
-            if (rageTimer > 0)
-            {
-                rageTimer -= Time.fixedDeltaTime;
-            }
-            else
-            {
-                rageTimer = 1;
-                rageBar.addHealth(-Constants.rageLostPerSecond);
-            }
-        }
-
         if(transform.position.y < -6) {
             deathAnim.SetTrigger("death");
         }
@@ -119,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.tag == "weapon")
         {
-            rageBar.GetComponent<HealthBar>().addHealth(.2f);
+            //rageBar.GetComponent<HealthBar>().addHealth(.2f);
         }
 
     }

@@ -23,12 +23,12 @@ public class DestructableWall : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.5f, LayerMask.GetMask("Player"));
         for (int i = 0; i < colliders.Length; i++) {
             //if (colliders[i].gameObject.GetComponent<PlayerMovement>().inCriss && colliders[i].gameObject.GetComponent<PlayerMovement>().isRamming)
-            if (colliders[i].gameObject.GetComponent<PlayerMovement>().inCriss){
+            //if (colliders[i].gameObject.GetComponent<PlayerMovement>().inCriss){
                 //Destroy wall
                 upperWall.SetTrigger("destroy");
                 lowerWall.SetTrigger("destroy");
                 GetComponent<BoxCollider2D>().enabled = false;
-            }
+            //}
         }
     }
 

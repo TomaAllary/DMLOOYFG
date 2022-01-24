@@ -56,7 +56,7 @@ public class Picpic : MonoBehaviour
 
             collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(collision.gameObject.GetComponent<Rigidbody2D>().velocity.x, 0);
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Constants.picpicPushForce * dir);
-            collision.gameObject.GetComponent<PlayerMovement>().rageBar.addHealth(.2f);
+            //collision.gameObject.GetComponent<PlayerMovement>().rageBar.addHealth(.2f);
         }
     }
 

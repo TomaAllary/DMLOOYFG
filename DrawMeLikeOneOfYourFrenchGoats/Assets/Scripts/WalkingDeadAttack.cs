@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WalkingDeadAttack : MonoBehaviour
 {
-    [SerializeField] HealthBar rageBar;
+    //[SerializeField] HealthBar rageBar;
     [SerializeField] BoxCollider2D attackCollider;
     private float timer = 0;
     private bool isAttacking = false;
@@ -26,7 +26,7 @@ public class WalkingDeadAttack : MonoBehaviour
         }
         else if (isAttacking)
         {
-            rageBar.addHealth(.4f);
+            //rageBar.addHealth(.4f);
             isAttacking = false;
         }
     }
@@ -45,7 +45,7 @@ public class WalkingDeadAttack : MonoBehaviour
             //hurt
             collision.gameObject.GetComponent<PlayerMovement>().PlayHurtSound();
 
-            rageBar = collision.gameObject.GetComponent<PlayerMovement>().rageBar;
+            //rageBar = collision.gameObject.GetComponent<PlayerMovement>().rageBar;
             isAttacking = true;
             timer = .1f;
             

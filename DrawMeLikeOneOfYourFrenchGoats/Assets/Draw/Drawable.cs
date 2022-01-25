@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ public class Drawable : MonoBehaviour
     public GameObject brush;
 
     public RenderTexture rt;
-    public RawImage bg;
+    public Texture2D bg;
 
     LineRenderer currentLineRenderer;
 
@@ -29,7 +30,8 @@ public class Drawable : MonoBehaviour
             PointToMousePos();
         }
         else if(Input.GetKeyUp(KeyCode.Mouse0)){
-           // bg.texture = toTexture2D(rt);
+            //bg = toTexture2D(rt);
+            bg.SetPixels32(toTexture2D(rt).GetPixels32());
         }
         else {
             currentLineRenderer = null;
@@ -72,6 +74,13 @@ public class Drawable : MonoBehaviour
         tex.Apply();
 
         RenderTexture.active = old_rt;
+
+        byte[] bytes;
+        bytes = tex.EncodeToPNG();
+
+        System.IO.File.WriteAllBytes(
+            ".." +  Path.PathSeparator + "myImg.png", bytes);
+
         return tex;
     }
 

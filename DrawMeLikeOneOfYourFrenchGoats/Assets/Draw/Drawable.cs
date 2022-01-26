@@ -131,7 +131,6 @@ public class Drawable : MonoBehaviour
         //update drawing with http request..
 
         string base64String = Convert.ToBase64String(data);
-        //byte[] backToBytes = Base64.decodeBase64(base64String);
         NetworkMsg toSend = new NetworkMsg(myUUId);
         toSend.imageByteArray = base64String;
 

@@ -6,9 +6,12 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ServerDrawManager : MonoBehaviour
 {
+
+    public RawImage boardToUpdate;
 
     private List<NetworkMsg> requests = new List<NetworkMsg>();
     private Mutex requestMutex = new Mutex();
@@ -28,9 +31,21 @@ public class ServerDrawManager : MonoBehaviour
     void Update()
     {
         if(requests.Count > 0) {
-            foreach(NetworkMsg req in requests) {
+            requestMutex.WaitOne();
 
+            foreach (NetworkMsg req in requests) {
+                byte[] backToBytes = Convert.FromBase64String(req.imageByteArray);
+                //File.WriteAllBytes(dataPath + "/ServerSideImg.png", backToBytes);
+
+                Texture2D tex = new Texture2D(1, 1);
+                tex.LoadImage(backToBytes);
+
+                boardToUpdate.texture = tex;
             }
+
+            requests.Clear();
+
+            requestMutex.ReleaseMutex();
         }
     }
 
@@ -66,10 +81,6 @@ public class ServerDrawManager : MonoBehaviour
                 requestMutex.WaitOne();
                 requests.Add(msg);
                 Debug.Log("msg from: " + msg.senderUUID);
-
-                byte[] backToBytes = Convert.FromBase64String(msg.imageByteArray);
-                File.WriteAllBytes(dataPath + "/ServerSideImg.png", backToBytes);
-
                 requestMutex.ReleaseMutex();
             }
 

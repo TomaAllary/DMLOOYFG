@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +11,6 @@ public class Drawable : MonoBehaviour
     public GameObject brush;
 
     public RenderTexture rt;
-    public Object updatableDrawImgAsset;
 
     public GameObject drawPanelObj;
 
@@ -18,9 +18,11 @@ public class Drawable : MonoBehaviour
 
     Vector2 lastPos;
 
+    //saving frequence when drawing
     private float saveFrequence = 2.5f;
 
-
+    private ClientDrawManager client = new ClientDrawManager("http://localhost:3000");
+    private string myUUId = "test";
 
     private void Update() {
         if(drawPanelObj.activeSelf)
@@ -122,8 +124,18 @@ public class Drawable : MonoBehaviour
         texture2D.Apply();
 
         //write data to file
-        var data = texture2D.EncodeToPNG();
+        byte[] data = texture2D.EncodeToPNG();
         File.WriteAllBytes(Application.dataPath + "/ActualDraw.png", data);
+
+
+        //update drawing with http request..
+
+        string base64String = Convert.ToBase64String(data);
+        //byte[] backToBytes = Base64.decodeBase64(base64String);
+        NetworkMsg toSend = new NetworkMsg(myUUId);
+        toSend.imageByteArray = base64String;
+
+        client.SendRequest(toSend);
 
     }
 

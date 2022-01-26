@@ -12,6 +12,8 @@ public class Drawable : MonoBehaviour
     public RenderTexture rt;
     public Object updatableDrawImgAsset;
 
+    public GameObject drawPanelObj;
+
     LineRenderer currentLineRenderer;
 
     Vector2 lastPos;
@@ -19,7 +21,8 @@ public class Drawable : MonoBehaviour
 
 
     private void Update() {
-        Drawing();
+        if(drawPanelObj.activeSelf)
+            Drawing();
     }
 
     private void OnDestroy() {
@@ -66,6 +69,14 @@ public class Drawable : MonoBehaviour
             AddAPoint(mousePos);
             lastPos = mousePos;
         }
+    }
+
+    public void Clear() {
+        foreach(GameObject line in GameObject.FindGameObjectsWithTag("Ink")) {
+            Destroy(line);
+        }
+
+        Save();
     }
 
     public void Save() {

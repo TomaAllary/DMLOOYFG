@@ -18,6 +18,8 @@ public class Drawable : MonoBehaviour
 
     Vector2 lastPos;
 
+    private float saveFrequence = 2.5f;
+
 
 
     private void Update() {
@@ -35,7 +37,18 @@ public class Drawable : MonoBehaviour
             CreateBrush();
         }
         else if (Input.GetKey(KeyCode.Mouse0)) {
-            PointToMousePos();
+            if (currentLineRenderer == null)
+                CreateBrush();
+            else
+                PointToMousePos();
+
+            if(saveFrequence < 0) {
+                Save();
+                saveFrequence = 2.5f;
+            }
+            else {
+                saveFrequence -= Time.deltaTime;
+            }
         }
         else if(Input.GetKeyUp(KeyCode.Mouse0)){
             Save();
@@ -46,12 +59,17 @@ public class Drawable : MonoBehaviour
     }
 
     void CreateBrush() {
+        Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
+        //hardcode point limit:
+        if (mousePos.x < -7.8 || mousePos.x > 17.12 || mousePos.y < -9.1 || mousePos.y > 4.8) {
+            currentLineRenderer = null;
+            return;
+        }
+
         GameObject brushInstance = Instantiate(brush);
         currentLineRenderer = brushInstance.GetComponent<LineRenderer>();
 
         //because you gotta have 2 points to start a line renderer, 
-        Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
-
         currentLineRenderer.SetPosition(0, mousePos);
         currentLineRenderer.SetPosition(1, mousePos);
 
@@ -65,6 +83,13 @@ public class Drawable : MonoBehaviour
 
     void PointToMousePos() {
         Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
+
+        //hardcode point limit:
+        if (mousePos.x < -7.8 || mousePos.x > 17.12 || mousePos.y < -9.1 || mousePos.y > 4.8) {
+            currentLineRenderer = null;
+            return;
+        }
+
         if (lastPos != mousePos) {
             AddAPoint(mousePos);
             lastPos = mousePos;

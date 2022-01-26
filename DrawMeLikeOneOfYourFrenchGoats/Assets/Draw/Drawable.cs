@@ -9,6 +9,8 @@ public class Drawable : MonoBehaviour
 {
     public Camera m_camera;
     public GameObject brush;
+    public GameObject eraserBrush;
+    private GameObject currentBrush;
 
     public RenderTexture rt;
 
@@ -23,6 +25,10 @@ public class Drawable : MonoBehaviour
 
     private ClientDrawManager client = new ClientDrawManager("http://localhost:3000");
     private string myUUId = "test";
+
+    private void Start() {
+        currentBrush = brush;
+    }
 
     private void Update() {
         if(drawPanelObj.activeSelf)
@@ -60,6 +66,13 @@ public class Drawable : MonoBehaviour
         }
     }
 
+    public void toggleEraserPencil() {
+        if (currentBrush == brush)
+            currentBrush = eraserBrush;
+        else
+            currentBrush = brush;
+    }
+
     void CreateBrush() {
         Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
         //hardcode point limit:
@@ -68,16 +81,26 @@ public class Drawable : MonoBehaviour
             return;
         }
 
-        GameObject brushInstance = Instantiate(brush);
+        GameObject brushInstance = Instantiate(currentBrush);
         currentLineRenderer = brushInstance.GetComponent<LineRenderer>();
 
-        //because you gotta have 2 points to start a line renderer, 
-        currentLineRenderer.SetPosition(0, mousePos);
-        currentLineRenderer.SetPosition(1, mousePos);
+        if (currentBrush == eraserBrush) {
+            Vector3 pos = new Vector3(mousePos.x, mousePos.y, -1);
+
+            //because you gotta have 2 points to start a line renderer, 
+            currentLineRenderer.SetPosition(0, pos);
+            currentLineRenderer.SetPosition(1, pos);
+        }
+        else {
+            //because you gotta have 2 points to start a line renderer, 
+            currentLineRenderer.SetPosition(0, mousePos);
+            currentLineRenderer.SetPosition(1, mousePos);
+        }
+        
 
     }
 
-    void AddAPoint(Vector2 pointPos) {
+    void AddAPoint(Vector3 pointPos) {
         currentLineRenderer.positionCount++;
         int positionIndex = currentLineRenderer.positionCount - 1;
         currentLineRenderer.SetPosition(positionIndex, pointPos);
@@ -93,8 +116,16 @@ public class Drawable : MonoBehaviour
         }
 
         if (lastPos != mousePos) {
-            AddAPoint(mousePos);
-            lastPos = mousePos;
+            if (currentBrush == eraserBrush) {
+                Vector3 pos = new Vector3(mousePos.x, mousePos.y, -1);
+                AddAPoint(pos);
+                lastPos = mousePos;
+            }
+            else {
+                AddAPoint(mousePos);
+                lastPos = mousePos;
+            }
+
         }
     }
 

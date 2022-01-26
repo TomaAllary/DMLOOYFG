@@ -10,17 +10,22 @@ public class Drawable : MonoBehaviour
     public GameObject brush;
 
     public RenderTexture rt;
-    public Texture2D bg;
+    public Object updatableDrawImgAsset;
 
     LineRenderer currentLineRenderer;
 
     Vector2 lastPos;
 
+
+
     private void Update() {
         Drawing();
     }
 
-    
+    private void OnDestroy() {
+        ResetTexture();
+    }
+
 
     void Drawing() {
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
@@ -30,12 +35,10 @@ public class Drawable : MonoBehaviour
             PointToMousePos();
         }
         else if(Input.GetKeyUp(KeyCode.Mouse0)){
-            //bg = toTexture2D(rt);
-            bg.SetPixels32(toTexture2D(rt).GetPixels32());
+            Save();
         }
         else {
             currentLineRenderer = null;
-
         }
     }
 
@@ -65,23 +68,44 @@ public class Drawable : MonoBehaviour
         }
     }
 
-    public Texture2D toTexture2D(RenderTexture rTex) {
-        Texture2D tex = new Texture2D(rTex.width, rTex.height, TextureFormat.RGB24, false);
-        var old_rt = RenderTexture.active;
-        RenderTexture.active = rTex;
+    public void Save() {
+        StartCoroutine(CoSave());
+    }
 
-        tex.ReadPixels(new Rect(0, 0, rTex.width, rTex.height), 0, 0);
-        tex.Apply();
+    private IEnumerator CoSave() {
+        //wait for rendering
+        yield return new WaitForEndOfFrame();
+        Debug.Log(Application.dataPath + "/ActualDraw.png");
 
-        RenderTexture.active = old_rt;
+        //set active texture
+        RenderTexture.active = rt;
 
-        byte[] bytes;
-        bytes = tex.EncodeToPNG();
+        //convert rendering texture to texture2D
+        var texture2D = new Texture2D(rt.width, rt.height);
+        texture2D.ReadPixels(new Rect(0, 0, rt.width, rt.height), 0, 0);
+        texture2D.Apply();
 
-        System.IO.File.WriteAllBytes(
-            ".." +  Path.PathSeparator + "myImg.png", bytes);
+        //write data to file
+        var data = texture2D.EncodeToPNG();
+        File.WriteAllBytes(Application.dataPath + "/ActualDraw.png", data);
 
-        return tex;
+    }
+
+    public void ResetTexture() {
+        var texture2D = new Texture2D(rt.width, rt.height);
+
+        Color32 resetColor = new Color32(255, 255, 255, 255);
+        Color32[] resetColorArray = texture2D.GetPixels32();
+
+        for (int i = 0; i < resetColorArray.Length; i++) {
+            resetColorArray[i] = resetColor;
+        }
+
+        texture2D.SetPixels32(resetColorArray);
+        texture2D.Apply();
+
+        var data = texture2D.EncodeToPNG();
+        File.WriteAllBytes(Application.dataPath + "/ActualDraw.png", data);
     }
 
 }

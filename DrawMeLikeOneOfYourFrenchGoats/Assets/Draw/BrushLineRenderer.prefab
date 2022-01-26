@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2857287420400641372}
   - component: {fileID: 7042382202854472838}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BrushLineRenderer
-  m_TagString: Untagged
+  m_TagString: Ink
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,7 +50,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 8c8a4b07b317deb4cbf41e632c960cdf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

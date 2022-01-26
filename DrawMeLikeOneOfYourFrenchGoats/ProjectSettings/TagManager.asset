@@ -8,6 +8,7 @@ TagManager:
   - Platform
   - doubleDamage
   - melee
+  - Ink
   layers:
   - Default
   - TransparentFX

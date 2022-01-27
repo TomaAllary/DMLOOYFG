@@ -2112,6 +2112,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 841153769}
   m_CullTransparentMesh: 1
+--- !u!1 &909638681 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8735964473776443161, guid: 0937383185ae73d49a2932cfd0103b54, type: 3}
+  m_PrefabInstance: {fileID: 2110326108}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1005116664
 GameObject:
   m_ObjectHideFlags: 0
@@ -2273,6 +2278,7 @@ GameObject:
   - component: {fileID: 1030077061}
   - component: {fileID: 1030077060}
   - component: {fileID: 1030077059}
+  - component: {fileID: 1030077063}
   m_Layer: 8
   m_Name: Drawing Canva
   m_TagString: Untagged
@@ -2362,6 +2368,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1030077063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030077058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56b14a5c67b76f044babf4cefcd507b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1077168067
 GameObject:
   m_ObjectHideFlags: 0
@@ -4617,7 +4635,7 @@ Tilemap:
       - {fileID: 21300000, guid: 2fb530bc4c2b61447b2c6d46bf39a760, type: 3}
       - {fileID: 21300000, guid: 00402f018da4d174db70515a8adfcb1f, type: 3}
       - {fileID: 21300000, guid: a64cb8dfefcf31b438cc23efa1a3c5c8, type: 3}
-      m_AnimationSpeed: 40
+      m_AnimationSpeed: 40.000004
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -9, y: -5, z: 0}
@@ -4903,7 +4921,7 @@ Tilemap:
       - {fileID: 21300000, guid: 2fb530bc4c2b61447b2c6d46bf39a760, type: 3}
       - {fileID: 21300000, guid: 00402f018da4d174db70515a8adfcb1f, type: 3}
       - {fileID: 21300000, guid: a64cb8dfefcf31b438cc23efa1a3c5c8, type: 3}
-      m_AnimationSpeed: 40.000004
+      m_AnimationSpeed: 40
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 4, y: -5, z: 0}
@@ -5117,7 +5135,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8735964473776443156, guid: 0937383185ae73d49a2932cfd0103b54, type: 3}
   m_PrefabInstance: {fileID: 2110326108}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 909638681}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 045b0b37375614a47b7f969cdf5c5bba, type: 3}
@@ -5494,13 +5512,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417ec9717d5fc3d479a5aab2155d9ec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hostGUIList:
+  clientGUIList:
   - {fileID: 1030077058}
   - {fileID: 384356265}
   - {fileID: 747494872}
   serverGUIList:
   - {fileID: 526212837}
   - {fileID: 336972667}
+  goat: {fileID: 909638681}
 --- !u!4 &1770041506
 Transform:
   m_ObjectHideFlags: 0

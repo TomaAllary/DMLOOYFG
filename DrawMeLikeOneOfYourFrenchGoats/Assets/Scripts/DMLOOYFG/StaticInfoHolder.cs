@@ -5,6 +5,6 @@ using UnityEngine;
 public class StaticInfoHolder
 {
 
-    public static bool isHost;
+    public static bool isClient = false;
 
 }

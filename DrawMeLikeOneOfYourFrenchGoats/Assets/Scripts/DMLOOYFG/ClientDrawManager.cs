@@ -16,21 +16,23 @@ public class ClientDrawManager
     }
 
     public void SendRequest(NetworkMsg toSend) {
-        Thread t = new Thread(() => AsyncActionRequest(toSend));
+        /*Thread t = new Thread(() => AsyncActionRequest(toSend));
         t.IsBackground = true;
-        t.Start();
+        t.Start();*/
+        AsyncActionRequest(toSend);
     }
 
 
     //use as a thread only
     private void AsyncActionRequest(NetworkMsg request) {
+        Debug.Log("Begin request to: " + serverAdrr);
         var httpWebRequest = (HttpWebRequest)WebRequest.Create(serverAdrr);
         httpWebRequest.ContentType = "application/json";
         httpWebRequest.Method = "POST";
 
         using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream())) {
             string json = JsonUtility.ToJson(request);
-
+            Debug.Log("json: " + json);
             streamWriter.Write(json);
         }
 

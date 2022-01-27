@@ -23,7 +23,7 @@ public class Drawable : MonoBehaviour
     //saving frequence when drawing
     private float saveFrequence = 2.5f;
 
-    private ClientDrawManager client = new ClientDrawManager("http://0ff6-209-169-177-115.ngrok.io");
+    private ClientDrawManager client = new ClientDrawManager("http://localhost:3000");
     private string myUUId = "test";
 
     private void Start() {

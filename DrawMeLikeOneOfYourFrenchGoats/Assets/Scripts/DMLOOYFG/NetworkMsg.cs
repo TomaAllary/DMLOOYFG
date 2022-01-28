@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class NetworkMsg
 {
-    public string senderUUID;
+    public string msgType;
     public string imageByteArray;
-
-    public NetworkMsg() {
-        senderUUID = System.Guid.NewGuid().ToString();
-    }
-
-    public NetworkMsg(string uuid) {
-        senderUUID = uuid;
-    }
-
+    public string goatX;
+    public string goatY;
 }

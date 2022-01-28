@@ -774,6 +774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_camera: {fileID: 316594518}
+  goatPos: {fileID: 909638687}
   brush: {fileID: 6661358911247209182, guid: 8ad47cb37fdf69647b4da790ba318d8d, type: 3}
   eraserBrush: {fileID: 6661358911247209182, guid: 9532737ba890b1c49be88483a028c02a, type: 3}
   rt: {fileID: 8400000, guid: ed76c84915103ff4cb099847ea8fbc5e, type: 2}
@@ -885,6 +886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardToUpdate: {fileID: 1696301996}
+  goat: {fileID: 909638687}
 --- !u!4 &526212839
 Transform:
   m_ObjectHideFlags: 0
@@ -2115,6 +2117,11 @@ CanvasRenderer:
 --- !u!1 &909638681 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8735964473776443161, guid: 0937383185ae73d49a2932cfd0103b54, type: 3}
+  m_PrefabInstance: {fileID: 2110326108}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &909638687 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8735964473776443158, guid: 0937383185ae73d49a2932cfd0103b54, type: 3}
   m_PrefabInstance: {fileID: 2110326108}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1005116664

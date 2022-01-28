@@ -8,8 +8,10 @@ using UnityEngine.UI;
 public class Drawable : MonoBehaviour
 {
     public Camera m_camera;
+    public Transform goatPos;
     public GameObject brush;
     public GameObject eraserBrush;
+
     private GameObject currentBrush;
 
     public RenderTexture rt;
@@ -23,7 +25,12 @@ public class Drawable : MonoBehaviour
     //saving frequence when drawing
     private float saveFrequence = 2.5f;
 
-    private ClientDrawManager client = new ClientDrawManager("http://localhost:3000");
+    //saving frequence when drawing
+    private float posUpdateFrequence = 0.5f;
+
+    //cmd to generate the good link: 
+    //ngrok http http://localhost:xxxx -host-header="localhost:xxxx" 
+    private ClientDrawManager client = new ClientDrawManager("http://0505-209-169-177-115.ngrok.io");
     private string myUUId = "test";
 
     private void Start() {
@@ -33,6 +40,15 @@ public class Drawable : MonoBehaviour
     private void Update() {
         if(drawPanelObj.activeSelf)
             Drawing();
+
+        if (posUpdateFrequence < 0) {
+
+            RefreshGoatPos();
+            posUpdateFrequence = 0.5f;
+        }
+        else {
+            posUpdateFrequence -= Time.deltaTime;
+        }
     }
 
     private void OnDestroy() {
@@ -141,6 +157,10 @@ public class Drawable : MonoBehaviour
         StartCoroutine(CoSave());
     }
 
+    public void RefreshGoatPos() {
+        StartCoroutine(CoRefreshPos());
+    }
+
     private IEnumerator CoSave() {
         //wait for rendering
         yield return new WaitForEndOfFrame();
@@ -162,11 +182,25 @@ public class Drawable : MonoBehaviour
         //update drawing with http request..
 
         string base64String = Convert.ToBase64String(data);
-        NetworkMsg toSend = new NetworkMsg(myUUId);
+        NetworkMsg toSend = new NetworkMsg();
+        toSend.msgType = "image_update";
         toSend.imageByteArray = base64String;
 
         client.SendRequest(toSend);
 
+    }
+
+    private IEnumerator CoRefreshPos() {
+        NetworkMsg req = new NetworkMsg();
+        req.msgType = "goat_pos";
+
+        NetworkMsg response = JsonUtility.FromJson<NetworkMsg>( client.SendRequest(req) );
+        if (response.msgType == "goat_pos") {
+            float x = float.Parse(response.goatX);
+            float y = float.Parse(response.goatY);
+            goatPos.position = new Vector3(x, y, goatPos.position.z);
+        }
+        yield return 0;
     }
 
     public void ResetTexture() {

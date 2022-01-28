@@ -15,17 +15,19 @@ public class ClientDrawManager
         myUUID = "";
     }
 
-    public void SendRequest(NetworkMsg toSend) {
+    public string SendRequest(NetworkMsg toSend) {
         /*Thread t = new Thread(() => AsyncActionRequest(toSend));
         t.IsBackground = true;
         t.Start();*/
-        AsyncActionRequest(toSend);
+        return AsyncActionRequest(toSend);
     }
 
 
     //use as a thread only
-    private void AsyncActionRequest(NetworkMsg request) {
-        Debug.Log("Begin request to: " + serverAdrr);
+    private string AsyncActionRequest(NetworkMsg request) {
+        string result = "";
+
+        Debug.Log("Begin request: " + request.msgType);
         var httpWebRequest = (HttpWebRequest)WebRequest.Create(serverAdrr);
         httpWebRequest.ContentType = "application/json";
         httpWebRequest.Method = "POST";
@@ -38,8 +40,10 @@ public class ClientDrawManager
 
         var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
         using (var streamReader = new StreamReader(httpResponse.GetResponseStream())) {
-            var result = streamReader.ReadToEnd();
+            result = streamReader.ReadToEnd();
             Debug.Log("request result: " + result);
         }
+
+        return result;
     }
 }

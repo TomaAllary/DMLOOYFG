@@ -12,6 +12,7 @@ public class ServerDrawManager : MonoBehaviour
 {
 
     public RawImage boardToUpdate;
+    public Transform goat;
 
     private List<NetworkMsg> requests = new List<NetworkMsg>();
     private Mutex requestMutex = new Mutex();
@@ -34,13 +35,17 @@ public class ServerDrawManager : MonoBehaviour
             requestMutex.WaitOne();
 
             foreach (NetworkMsg req in requests) {
-                byte[] backToBytes = Convert.FromBase64String(req.imageByteArray);
-                //File.WriteAllBytes(dataPath + "/ServerSideImg.png", backToBytes);
+                if (req.msgType == "image_update") {
+                    byte[] backToBytes = Convert.FromBase64String(req.imageByteArray);
+                    //File.WriteAllBytes(dataPath + "/ServerSideImg.png", backToBytes);
 
-                Texture2D tex = new Texture2D(1, 1);
-                tex.LoadImage(backToBytes);
+                    Texture2D tex = new Texture2D(1, 1);
+                    tex.LoadImage(backToBytes);
 
-                boardToUpdate.texture = tex;
+                    boardToUpdate.texture = tex;
+                }
+                
+                
             }
 
             requests.Clear();
@@ -77,28 +82,41 @@ public class ServerDrawManager : MonoBehaviour
             using (StreamReader readStream = new StreamReader(request.InputStream, Encoding.UTF8)) {
                 string received = readStream.ReadToEnd();
                 msg = JsonUtility.FromJson<NetworkMsg>(received);
+                NetworkMsg resToSend = new NetworkMsg();
 
-                requestMutex.WaitOne();
-                requests.Add(msg);
-                Debug.Log("msg from: " + msg.senderUUID);
-                requestMutex.ReleaseMutex();
+                if (msg.msgType == "goat_pos") {
+
+                    resToSend.msgType = "goat_pos";
+                    resToSend.goatX = (goat.position.x).ToString();
+                    resToSend.goatY = (goat.position.y).ToString();
+
+                }
+                else {
+                    resToSend.msgType = "image updated";
+
+                    requestMutex.WaitOne();
+                    requests.Add(msg);
+                    requestMutex.ReleaseMutex();
+                }
+
+
+
+
+
+                // Obtain a response object.
+                HttpListenerResponse response = context.Response;
+                // Construct a response.
+                string responseString = JsonUtility.ToJson(resToSend);
+
+
+                byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
+                // Get a response stream and write the response to it.
+                response.ContentLength64 = buffer.Length;
+                System.IO.Stream output = response.OutputStream;
+                output.Write(buffer, 0, buffer.Length);
+                // You must close the output stream.
+                output.Close();
             }
-
-
-
-
-
-            // Obtain a response object.
-            HttpListenerResponse response = context.Response;
-            // Construct a response.
-            string responseString = "action done";
-            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
-            // Get a response stream and write the response to it.
-            response.ContentLength64 = buffer.Length;
-            System.IO.Stream output = response.OutputStream;
-            output.Write(buffer, 0, buffer.Length);
-            // You must close the output stream.
-            output.Close();
         }
 
 

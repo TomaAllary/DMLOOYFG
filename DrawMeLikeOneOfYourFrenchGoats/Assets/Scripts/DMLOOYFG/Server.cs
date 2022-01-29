@@ -58,13 +58,14 @@ public class Server
             using (StreamReader readStream = new StreamReader(request.InputStream, Encoding.UTF8)) {
                 string received = readStream.ReadToEnd();
                 msg = JsonUtility.FromJson<NetworkMsg>(received);
-                NetworkMsg resToSend;
+                NetworkMsg resToSend = new NetworkMsg(); ;
 
-
-                if (handler != null)
+                if (handler != null && msg.msgType != "conn") {
                     resToSend = handler.Invoke(msg);
-                else
-                    resToSend = new NetworkMsg();
+                }
+                else if (msg.msgType == "conn" && StaticInfoHolder.onClientConnect != null) {
+                    StaticInfoHolder.onClientConnect.Invoke();
+                }
 
                 // Obtain a response object.
                 HttpListenerResponse response = context.Response;

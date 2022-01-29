@@ -56,4 +56,22 @@ public class ClientRequestSender
 
         return "error";
     }
+
+
+    public static HttpStatusCode ConnectionTest() {
+
+        var httpWebRequest = (HttpWebRequest)WebRequest.Create(StaticInfoHolder.serverAddr);
+        httpWebRequest.ContentType = "application/json";
+        httpWebRequest.Method = "POST";
+
+        using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream())) {
+            NetworkMsg req = new NetworkMsg();
+            req.msgType = "conn";
+            string json = JsonUtility.ToJson(req);
+            streamWriter.Write(json);
+        }
+
+        var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+        return httpResponse.StatusCode;
+    }
 }

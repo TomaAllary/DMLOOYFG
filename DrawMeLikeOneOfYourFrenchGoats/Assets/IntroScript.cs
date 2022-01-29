@@ -7,6 +7,10 @@ public class IntroScript : MonoBehaviour
     public GameObject panel1;
     public GameObject panel2;
     public GameObject panel3;
+
+    private void Awake() {
+        Server.stopServer();
+    }
     // Start is called before the first frame update
     void Start()
     {

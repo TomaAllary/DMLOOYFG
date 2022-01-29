@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ServerDrawManager : MonoBehaviour
@@ -29,6 +30,7 @@ public class ServerDrawManager : MonoBehaviour
             if (req.msgType == "goat_pos") {
 
                 resToSend.msgType = "goat_pos";
+                resToSend.scene = SceneManager.GetActiveScene().name;
                 posMutex.WaitOne();
                 resToSend.goatX = (xPos).ToString();
                 resToSend.goatY = (yPos).ToString();

@@ -7,7 +7,8 @@ public class SceneGUIManager : MonoBehaviour
 
     public GameObject[] clientGUIList;
     public GameObject[] serverGUIList;
-    public GameObject goat;
+    public Behaviour[] serverComponents;
+    public Behaviour[] clientComponents;
 
 
     // Start is called before the first frame update
@@ -16,13 +17,17 @@ public class SceneGUIManager : MonoBehaviour
             foreach (GameObject obj in clientGUIList) {
                 obj.SetActive(true);
             }
-            goat.GetComponent<PlayerMovement>().enabled = false;
+            foreach (Behaviour c in clientComponents) {
+                c.enabled = true;
+            }
         }
         else {
             foreach (GameObject obj in serverGUIList) {
                 obj.SetActive(true);
+                foreach (Behaviour c in serverComponents) {
+                    c.enabled = true;
+                }
             }
-            goat.GetComponent<PlayerMovement>().enabled = true;
         }
     }
 

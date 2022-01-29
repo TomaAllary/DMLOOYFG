@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Drawable : MonoBehaviour
@@ -13,9 +14,7 @@ public class Drawable : MonoBehaviour
     public GameObject eraserBrush;
 
     private GameObject currentBrush;
-
     public RenderTexture rt;
-
     public GameObject drawPanelObj;
 
     LineRenderer currentLineRenderer;
@@ -193,9 +192,13 @@ public class Drawable : MonoBehaviour
 
             NetworkMsg response = JsonUtility.FromJson<NetworkMsg>(rawResponse);
             if (response.msgType == "goat_pos") {
+                if (response.scene != SceneManager.GetActiveScene().name) {
+                    SceneManager.LoadScene(response.scene);
+                }
                 float x = float.Parse(response.goatX);
                 float y = float.Parse(response.goatY);
                 goatPos.position = new Vector3(x, y, goatPos.position.z);
+                
             }
         }
         yield return 0;

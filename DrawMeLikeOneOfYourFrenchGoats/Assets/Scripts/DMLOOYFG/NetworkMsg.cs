@@ -8,5 +8,5 @@ public class NetworkMsg
     public string imageByteArray;
     public string goatX;
     public string goatY;
-    public string lvl;
+    public string scene;
 }

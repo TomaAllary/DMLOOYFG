@@ -40,14 +40,16 @@ public class LvlSelector : MonoBehaviour
     }
 
     public void startLVL(int lvl) {
-        /*if (StaticInfoHolder.isClient) {
+       if (StaticInfoHolder.isClient) {
             NetworkMsg toSend = new NetworkMsg();
             toSend.msgType = "lvl";
-            toSend.lvl = lvl;
+            toSend.lvl = lvl.ToString();
 
-            client.SendRequest(toSend);
-        }*/
-        //SceneManager.LoadScene("");
+            string response = ClientRequestSender.SendRequest(toSend);
+            if(response == "lvl loaded") {
+                //SceneManager.LoadScene("");
+            }
+        }
     }
 
 

@@ -10,7 +10,6 @@ public class KillSwitch : MonoBehaviour
     public AudioSource winAudio;
     public string nextScene;
 
-    private Killable[] npcs;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,11 +20,6 @@ public class KillSwitch : MonoBehaviour
     {
         buttonOff.SetActive(false);
         buttonOn.SetActive(true);
-        npcs = Object.FindObjectsOfType<Killable>();
-        foreach (Killable k in npcs)
-        {
-            k.dieInMotion();
-        }
 
         winAudio.Play();
         StartCoroutine(NextScene());
@@ -33,7 +27,7 @@ public class KillSwitch : MonoBehaviour
 
     IEnumerator NextScene() {
         if (nextScene != "") {
-            GameObject.Find("bg music").GetComponent<AudioSource>().volume = 0.1f;
+            //GameObject.Find("bg music").GetComponent<AudioSource>().volume = 0.1f;
 
             yield return new WaitForSeconds(3);
 

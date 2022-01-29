@@ -44,8 +44,12 @@ public class ServerDrawManager : MonoBehaviour
 
                     boardToUpdate.texture = tex;
                 }
-                
-                
+                else if(req.msgType == "lvl") {
+                    int lvl = int.Parse(req.lvl);
+                    //SceneManager.LoadScene("");
+                }
+
+
             }
 
             requests.Clear();
@@ -90,6 +94,13 @@ public class ServerDrawManager : MonoBehaviour
                     resToSend.goatX = (goat.position.x).ToString();
                     resToSend.goatY = (goat.position.y).ToString();
 
+                }
+                else if (msg.msgType == "lvl") {
+                    resToSend.msgType = "lvl loaded";
+
+                    requestMutex.WaitOne();
+                    requests.Add(msg);
+                    requestMutex.ReleaseMutex();
                 }
                 else {
                     resToSend.msgType = "image updated";

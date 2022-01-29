@@ -6,5 +6,6 @@ public class StaticInfoHolder
 {
 
     public static bool isClient = true;
+    public static string serverAddr = "";
 
 }

@@ -28,9 +28,6 @@ public class Drawable : MonoBehaviour
     //saving frequence when drawing
     private float posUpdateFrequence = 0.5f;
 
-    //cmd to generate the good link: 
-    //ngrok http http://localhost:xxxx -host-header="localhost:xxxx" 
-    private ClientDrawManager client = new ClientDrawManager("http://0505-209-169-177-115.ngrok.io");
     private string myUUId = "test";
 
     private void Start() {
@@ -186,7 +183,7 @@ public class Drawable : MonoBehaviour
         toSend.msgType = "image_update";
         toSend.imageByteArray = base64String;
 
-        client.SendRequest(toSend);
+        ClientRequestSender.SendRequest(toSend);
 
     }
 
@@ -194,7 +191,7 @@ public class Drawable : MonoBehaviour
         NetworkMsg req = new NetworkMsg();
         req.msgType = "goat_pos";
 
-        NetworkMsg response = JsonUtility.FromJson<NetworkMsg>( client.SendRequest(req) );
+        NetworkMsg response = JsonUtility.FromJson<NetworkMsg>(ClientRequestSender.SendRequest(req) );
         if (response.msgType == "goat_pos") {
             float x = float.Parse(response.goatX);
             float y = float.Parse(response.goatY);

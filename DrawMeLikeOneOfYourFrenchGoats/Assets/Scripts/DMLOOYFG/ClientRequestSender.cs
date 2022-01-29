@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -5,30 +6,35 @@ using System.Net;
 using System.Threading;
 using UnityEngine;
 
-public class ClientDrawManager
+public class ClientRequestSender
 {
-    private string myUUID;
-    private string serverAdrr;
+    //ngrok http http://localhost:3000 -host-header="localhost:3000" 
+    public static string SendRequest(NetworkMsg toSend) {
+       /* Thread t = new Thread(() => AsyncActionRequest(toSend));
+        Thread timeout = new Thread(() => AsyncThreadTimeout(t, 10));
+        timeout.Start();*/
 
-    public ClientDrawManager(string serverAdrr) {
-        this.serverAdrr = serverAdrr;
-        myUUID = "";
+        return AsyncActionRequest(toSend);
+
+        /*NetworkMsg resToSend = new NetworkMsg();
+        resToSend.msgType = "test1212";
+
+        return JsonUtility.ToJson(resToSend);*/
     }
 
-    public string SendRequest(NetworkMsg toSend) {
-        /*Thread t = new Thread(() => AsyncActionRequest(toSend));
-        t.IsBackground = true;
-        t.Start();*/
-        return AsyncActionRequest(toSend);
+    private static void AsyncThreadTimeout(Thread toTimeout, double timeout) {
+        toTimeout.Start();
+        if (!toTimeout.Join(TimeSpan.FromSeconds(timeout)))
+            toTimeout.Abort();
     }
 
 
     //use as a thread only
-    private string AsyncActionRequest(NetworkMsg request) {
+    private static string AsyncActionRequest(NetworkMsg request) {
         string result = "";
 
         Debug.Log("Begin request: " + request.msgType);
-        var httpWebRequest = (HttpWebRequest)WebRequest.Create(serverAdrr);
+        var httpWebRequest = (HttpWebRequest)WebRequest.Create(StaticInfoHolder.serverAddr);
         httpWebRequest.ContentType = "application/json";
         httpWebRequest.Method = "POST";
 

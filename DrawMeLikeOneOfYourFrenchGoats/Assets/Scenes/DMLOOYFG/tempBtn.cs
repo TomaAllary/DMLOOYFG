@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class tempBtn : MonoBehaviour
@@ -20,5 +21,11 @@ public class tempBtn : MonoBehaviour
 
     public void setServerAddr() {
         StaticInfoHolder.serverAddr = input.text;
+    }
+
+    public void setIsClient(bool client) {
+        StaticInfoHolder.isClient = client;
+
+        SceneManager.LoadScene("BaseScene");
     }
 }

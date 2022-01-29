@@ -19,7 +19,6 @@ public class Drawable : MonoBehaviour
     public GameObject drawPanelObj;
 
     LineRenderer currentLineRenderer;
-
     Vector2 lastPos;
 
     //saving frequence when drawing
@@ -27,8 +26,6 @@ public class Drawable : MonoBehaviour
 
     //saving frequence when drawing
     private float posUpdateFrequence = 0.5f;
-
-    private string myUUId = "test";
 
     private void Start() {
         currentBrush = brush;
@@ -191,11 +188,15 @@ public class Drawable : MonoBehaviour
         NetworkMsg req = new NetworkMsg();
         req.msgType = "goat_pos";
 
-        NetworkMsg response = JsonUtility.FromJson<NetworkMsg>(ClientRequestSender.SendRequest(req) );
-        if (response.msgType == "goat_pos") {
-            float x = float.Parse(response.goatX);
-            float y = float.Parse(response.goatY);
-            goatPos.position = new Vector3(x, y, goatPos.position.z);
+        string rawResponse = ClientRequestSender.SendRequest(req);
+        if (rawResponse != "error") {
+
+            NetworkMsg response = JsonUtility.FromJson<NetworkMsg>(rawResponse);
+            if (response.msgType == "goat_pos") {
+                float x = float.Parse(response.goatX);
+                float y = float.Parse(response.goatY);
+                goatPos.position = new Vector3(x, y, goatPos.position.z);
+            }
         }
         yield return 0;
     }

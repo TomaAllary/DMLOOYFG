@@ -45,11 +45,15 @@ public class ClientRequestSender
         }
 
         var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-        using (var streamReader = new StreamReader(httpResponse.GetResponseStream())) {
-            result = streamReader.ReadToEnd();
-            Debug.Log("request result: " + result);
+        if (httpResponse.StatusCode == HttpStatusCode.OK) {
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream())) {
+                result = streamReader.ReadToEnd();
+                Debug.Log("request result: " + result);
+            }
+
+            return result;
         }
 
-        return result;
+        return "error";
     }
 }

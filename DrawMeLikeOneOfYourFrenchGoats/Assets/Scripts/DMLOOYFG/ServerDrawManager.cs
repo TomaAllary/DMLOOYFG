@@ -14,18 +14,45 @@ public class ServerDrawManager : MonoBehaviour
     public RawImage boardToUpdate;
     public Transform goat;
 
+    private Mutex posMutex = new Mutex();
+    private float xPos;
+    private float yPos;
+
     private List<NetworkMsg> requests = new List<NetworkMsg>();
     private Mutex requestMutex = new Mutex();
-    private Thread listen;
-
-    private string dataPath;
     // Start is called before the first frame update
     void Start()
     {
-        listen = new Thread(ListenToRequest);
-        listen.Start();
+        Server.AddCallback((req) => {
+            NetworkMsg resToSend = new NetworkMsg();
 
-        dataPath = Application.dataPath;
+            if (req.msgType == "goat_pos") {
+
+                resToSend.msgType = "goat_pos";
+                posMutex.WaitOne();
+                resToSend.goatX = (xPos).ToString();
+                resToSend.goatY = (yPos).ToString();
+                posMutex.ReleaseMutex();
+
+            }
+            else if (req.msgType == "lvl") {
+                resToSend.msgType = "lvl loaded";
+
+                requestMutex.WaitOne();
+                requests.Add(req);
+                requestMutex.ReleaseMutex();
+            }
+            else {
+                resToSend.msgType = "image updated";
+
+                requestMutex.WaitOne();
+                requests.Add(req);
+                requestMutex.ReleaseMutex();
+            }
+
+            return resToSend;
+        });
+        Server.startServer();
     }
 
     // Update is called once per frame
@@ -37,7 +64,6 @@ public class ServerDrawManager : MonoBehaviour
             foreach (NetworkMsg req in requests) {
                 if (req.msgType == "image_update") {
                     byte[] backToBytes = Convert.FromBase64String(req.imageByteArray);
-                    //File.WriteAllBytes(dataPath + "/ServerSideImg.png", backToBytes);
 
                     Texture2D tex = new Texture2D(1, 1);
                     tex.LoadImage(backToBytes);
@@ -45,93 +71,24 @@ public class ServerDrawManager : MonoBehaviour
                     boardToUpdate.texture = tex;
                 }
                 else if(req.msgType == "lvl") {
-                    int lvl = int.Parse(req.lvl);
-                    //SceneManager.LoadScene("");
+
                 }
-
-
             }
 
             requests.Clear();
-
             requestMutex.ReleaseMutex();
         }
     }
 
-    private void OnDestroy() {
-        listen.Abort();
+    private void FixedUpdate() {
+        posMutex.WaitOne();
+        xPos = goat.position.x;
+        yPos = goat.position.y;
+        posMutex.ReleaseMutex();
     }
 
-
-
-
-    public void ListenToRequest() {
-        // Create a listener.
-        HttpListener listener = new HttpListener();
-
-        // Add the prefixes. //change for NGROK here
-        listener.Prefixes.Add("http://localhost:3000/");
-
-        listener.Start();
-        Debug.Log("Listening...");
-
-
-        while (true) {
-            // Note: The GetContext method blocks while waiting for a request.
-            HttpListenerContext context = listener.GetContext();
-            HttpListenerRequest request = context.Request;
-
-            NetworkMsg msg;
-
-            using (StreamReader readStream = new StreamReader(request.InputStream, Encoding.UTF8)) {
-                string received = readStream.ReadToEnd();
-                msg = JsonUtility.FromJson<NetworkMsg>(received);
-                NetworkMsg resToSend = new NetworkMsg();
-
-                if (msg.msgType == "goat_pos") {
-
-                    resToSend.msgType = "goat_pos";
-                    resToSend.goatX = (goat.position.x).ToString();
-                    resToSend.goatY = (goat.position.y).ToString();
-
-                }
-                else if (msg.msgType == "lvl") {
-                    resToSend.msgType = "lvl loaded";
-
-                    requestMutex.WaitOne();
-                    requests.Add(msg);
-                    requestMutex.ReleaseMutex();
-                }
-                else {
-                    resToSend.msgType = "image updated";
-
-                    requestMutex.WaitOne();
-                    requests.Add(msg);
-                    requestMutex.ReleaseMutex();
-                }
-
-
-
-
-
-                // Obtain a response object.
-                HttpListenerResponse response = context.Response;
-                // Construct a response.
-                string responseString = JsonUtility.ToJson(resToSend);
-
-
-                byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
-                // Get a response stream and write the response to it.
-                response.ContentLength64 = buffer.Length;
-                System.IO.Stream output = response.OutputStream;
-                output.Write(buffer, 0, buffer.Length);
-                // You must close the output stream.
-                output.Close();
-            }
-        }
-
-
-        listener.Stop();
-
+    private void OnDestroy() {
+        //listen.Abort();
+        Server.RemoveCallback();
     }
 }

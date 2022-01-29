@@ -5,7 +5,7 @@ using UnityEngine;
 public class StaticInfoHolder
 {
 
-    public static bool isClient = true;
+    public static bool isClient = false;
     public static string serverAddr = "";
 
 }

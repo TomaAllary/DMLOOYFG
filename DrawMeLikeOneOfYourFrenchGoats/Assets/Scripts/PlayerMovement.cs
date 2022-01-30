@@ -21,9 +21,13 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D[] hunters;
 
 
+    private Vector3 goatStartPos;
+
     // Start is called before the first frame update
     void Start()
     {
+        goatStartPos = transform.position;
+
         myAnimator = GetComponent<Animator>();
         isRamming = false;
         goatSparkle.gameObject.SetActive(false);
@@ -64,7 +68,8 @@ public class PlayerMovement : MonoBehaviour
         isJumping = false;
 
         if(transform.position.y < -10) {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            transform.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            transform.position = goatStartPos;
         }
     }
 

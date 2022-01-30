@@ -206,7 +206,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1265967559}
         m_TargetAssemblyTypeName: IntroScript, Assembly-CSharp
         m_MethodName: yesButton2
         m_Mode: 1
@@ -1234,7 +1234,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1265967559}
         m_TargetAssemblyTypeName: IntroScript, Assembly-CSharp
         m_MethodName: NoButton2
         m_Mode: 1
@@ -2682,7 +2682,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Are.. you.. sure?? (We don''t recommendit ) '
+  m_text: 'Are.. you.. sure?? (We don''t recommend it ) '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3216c48f68255c04fbce050e5c0eee1f, type: 2}
   m_sharedMaterial: {fileID: 1575161764060250377, guid: 3216c48f68255c04fbce050e5c0eee1f, type: 2}
@@ -2842,7 +2842,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1265967559}
         m_TargetAssemblyTypeName: IntroScript, Assembly-CSharp
         m_MethodName: yesButton1
         m_Mode: 1
@@ -3752,7 +3752,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1265967559}
         m_TargetAssemblyTypeName: IntroScript, Assembly-CSharp
         m_MethodName: noButton1
         m_Mode: 1

@@ -19,6 +19,10 @@ public class tempBtn : MonoBehaviour
         
     }
 
+    public void MainMenu() {
+        SceneManager.LoadScene("Intro");
+    }
+
     public void host() {
         StaticInfoHolder.isClient = false;
 

@@ -63,8 +63,8 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, isJumping);
         isJumping = false;
 
-        if(transform.position.y < -6) {
-            deathAnim.SetTrigger("death");
+        if(transform.position.y < -10) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 

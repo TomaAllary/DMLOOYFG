@@ -1500,9 +1500,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 499685310}
-        m_TargetAssemblyTypeName: tempBtn, Assembly-CSharp
-        m_MethodName: host
+      - m_Target: {fileID: 1265967559}
+        m_TargetAssemblyTypeName: IntroScript, Assembly-CSharp
+        m_MethodName: hostButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

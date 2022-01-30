@@ -17,8 +17,10 @@ public class LvlSelector : MonoBehaviour
 
     private void Awake() {
         Server.startServer();
-
-        progress = File.ReadAllText(Application.dataPath + "/SaveProgress.txt", Encoding.ASCII);
+        if (File.Exists(Application.dataPath + "/SaveProgress.txt"))
+            progress = File.ReadAllText(Application.dataPath + "/SaveProgress.txt", Encoding.ASCII);
+        else
+            progress = "";
         if (!progress.Contains("1"))
             progress += "1";
 

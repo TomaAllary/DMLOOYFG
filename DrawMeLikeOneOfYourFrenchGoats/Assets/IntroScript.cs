@@ -10,12 +10,12 @@ public class IntroScript : MonoBehaviour
     public GameObject panel3;
 
     private void Awake() {
-        Server.stopServer();
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        Server.stopServer();
+
     }
 
     // Update is called once per frame

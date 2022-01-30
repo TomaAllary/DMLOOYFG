@@ -195,9 +195,11 @@ public class Drawable : MonoBehaviour
                 if (response.scene != SceneManager.GetActiveScene().name) {
                     SceneManager.LoadScene(response.scene);
                 }
-                float x = float.Parse(response.goatX);
-                float y = float.Parse(response.goatY);
-                goatPos.position = new Vector3(x, y, goatPos.position.z);
+                else {
+                    float x = float.Parse(response.goatX);
+                    float y = float.Parse(response.goatY);
+                    goatPos.position = new Vector3(x, y, goatPos.position.z);
+                }
                 
             }
         }

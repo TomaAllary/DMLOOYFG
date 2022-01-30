@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DMLOOYFG/lvl2.unity
     guid: de68e88ce78d53d4b8c885d58fc46549
+  - enabled: 1
+    path: Assets/Scenes/DMLOOYFG/Final.unity
+    guid: 8905816afccbc4440ab01d588e8f423e
   m_configObjects: {}

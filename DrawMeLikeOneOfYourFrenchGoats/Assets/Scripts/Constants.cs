@@ -22,7 +22,7 @@ public static class Constants
     * Constants for Walking Dead
     */
     public const float walkingDeadSpeed = 1f;
-    public const float goatNormalJumpForce = 425f;
+    public const float goatNormalJumpForce = 725f;
     public const float goatRageJumpForce = 800f;
 
     public const float rageLostPerSecond = .25f;

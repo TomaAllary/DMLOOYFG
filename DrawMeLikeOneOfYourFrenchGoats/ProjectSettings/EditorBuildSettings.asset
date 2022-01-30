@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/DMLOOYFG/Intro.unity
     guid: c4e874b2d6d684b469e041d25fda3886
   - enabled: 1
-    path: Assets/Scenes/DMLOOYFG/BaseScene.unity
+    path: Assets/Scenes/DMLOOYFG/lvl3.unity
     guid: 3636bae4217d5c649922c113cf82e5ec
   - enabled: 1
     path: Assets/Scenes/DMLOOYFG/LvlScene.unity

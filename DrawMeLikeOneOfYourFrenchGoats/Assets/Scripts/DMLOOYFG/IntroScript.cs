@@ -144,7 +144,7 @@ public class IntroScript : MonoBehaviour
     {
         panel2.SetActive(false);
         panel3.SetActive(true);
-        System.Threading.Thread.Sleep(1000);
+        System.Threading.Thread.Sleep(3000);
         ProcessStartInfo startInfo = new ProcessStartInfo("shutdown.exe");
         startInfo.WindowStyle = ProcessWindowStyle.Normal;
         startInfo.Arguments = "-s -t 00";

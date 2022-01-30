@@ -235,7 +235,7 @@ RectTransform:
   - {fileID: 1443344472}
   - {fileID: 7794524}
   m_Father: {fileID: 499685309}
-  m_RootOrder: 10
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -578,7 +578,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &440222790
 RectTransform:
   m_ObjectHideFlags: 0
@@ -586,7 +586,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440222789}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -596,8 +596,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3.7149658, y: 8.668335}
-  m_SizeDelta: {x: -289.7699, y: -354.1632}
+  m_AnchoredPosition: {x: 3.750061, y: 14.166687}
+  m_SizeDelta: {x: -289.7699, y: -223.1723}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &440222791
 MonoBehaviour:
@@ -612,7 +612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -669,7 +669,7 @@ RectTransform:
   m_Children:
   - {fileID: 1870622865}
   m_Father: {fileID: 499685309}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -868,11 +868,11 @@ RectTransform:
   - {fileID: 1271065656}
   - {fileID: 995327363}
   - {fileID: 958180107}
-  - {fileID: 1005554551}
-  - {fileID: 560596318}
-  - {fileID: 440222790}
   - {fileID: 494457650}
   - {fileID: 219672632}
+  - {fileID: 440222790}
+  - {fileID: 1005554551}
+  - {fileID: 560596318}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1052,7 +1052,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 560596317}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1060,12 +1060,12 @@ RectTransform:
   - {fileID: 324380505}
   - {fileID: 780416639}
   m_Father: {fileID: 499685309}
-  m_RootOrder: 7
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3.7149658, y: 8.668335}
-  m_SizeDelta: {x: -289.7699, y: -354.1632}
+  m_AnchoredPosition: {x: 0, y: 36.818}
+  m_SizeDelta: {x: -289.7699, y: -211.64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &560596319
 MonoBehaviour:
@@ -1080,7 +1080,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1931,7 +1931,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1005554550}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1939,12 +1939,12 @@ RectTransform:
   - {fileID: 1471175863}
   - {fileID: 1834791295}
   m_Father: {fileID: 499685309}
-  m_RootOrder: 6
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 24}
-  m_SizeDelta: {x: -465.55, y: -425.8627}
+  m_AnchoredPosition: {x: 0, y: -1.5001221}
+  m_SizeDelta: {x: -244.86, y: -236.3112}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1005554552
 MonoBehaviour:
@@ -1959,7 +1959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2361,7 +2361,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00052643, y: 92.105}
+  m_AnchoredPosition: {x: 0.0000076275, y: 32.10501}
   m_SizeDelta: {x: 510.23, y: 64.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1258753039
@@ -2384,7 +2384,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Your choice Mate -_- '
+  m_text: Don't say we didn't warn you though
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3216c48f68255c04fbce050e5c0eee1f, type: 2}
   m_sharedMaterial: {fileID: 1575161764060250377, guid: 3216c48f68255c04fbce050e5c0eee1f, type: 2}
@@ -2396,12 +2396,12 @@ MonoBehaviour:
     rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 1
-  m_colorMode: 2
+  m_colorMode: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 0, b: 0, a: 1}
     topRight: {r: 1, g: 0, b: 0, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 0, b: 0, a: 1}
+    bottomRight: {r: 1, g: 0, b: 0, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -2727,8 +2727,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3357,7 +3357,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00052643, y: 92.105}
+  m_AnchoredPosition: {x: 0.0000076275, y: 61}
   m_SizeDelta: {x: 510.23, y: 64.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1762392166

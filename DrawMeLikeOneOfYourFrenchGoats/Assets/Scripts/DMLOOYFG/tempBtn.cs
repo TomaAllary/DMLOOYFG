@@ -23,6 +23,10 @@ public class tempBtn : MonoBehaviour
         SceneManager.LoadScene("Intro");
     }
 
+    public void quit() {
+        Application.Quit();
+    }
+
     public void host() {
         StaticInfoHolder.isClient = false;
 

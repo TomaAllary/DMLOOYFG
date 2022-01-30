@@ -379,7 +379,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Return to main menu
+  m_text: Kill the fuckin app
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3216c48f68255c04fbce050e5c0eee1f, type: 2}
   m_sharedMaterial: {fileID: 1575161764060250377, guid: 3216c48f68255c04fbce050e5c0eee1f, type: 2}
@@ -927,7 +927,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 499685310}
         m_TargetAssemblyTypeName: tempBtn, Assembly-CSharp
-        m_MethodName: MainMenu
+        m_MethodName: quit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

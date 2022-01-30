@@ -30,7 +30,7 @@ public class KillSwitch : MonoBehaviour
         if (hasWon) {
             if (fadeOut > 0) {
                 fadeOut -= Time.deltaTime;
-                overlayColor.a = 255;
+                overlayColor.a = (135 + (fadeOut * 40)) / 255;
                 overlay.color = overlayColor;
             }
 

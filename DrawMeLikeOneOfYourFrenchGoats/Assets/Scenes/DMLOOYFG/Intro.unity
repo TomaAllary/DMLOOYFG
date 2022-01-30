@@ -2593,13 +2593,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 499685310}
-        m_TargetAssemblyTypeName: tempBtn, Assembly-CSharp
-        m_MethodName: client
-        m_Mode: 2
+      - m_Target: {fileID: 1265967559}
+        m_TargetAssemblyTypeName: IntroScript, Assembly-CSharp
+        m_MethodName: joinButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: TMPro.TMP_InputField, Unity.TextMeshPro
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

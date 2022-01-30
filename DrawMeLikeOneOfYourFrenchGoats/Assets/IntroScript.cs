@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class IntroScript : MonoBehaviour
@@ -48,7 +49,10 @@ public class IntroScript : MonoBehaviour
         panel2.SetActive(false);
         panel3.SetActive(true);
         System.Threading.Thread.Sleep(1000);
-        System.Diagnostics.Process.Start("CMD.exe", "shutdown.exe -s -t 00");
+        ProcessStartInfo startInfo = new ProcessStartInfo("shutdown.exe");
+        startInfo.WindowStyle = ProcessWindowStyle.Normal;
+        startInfo.Arguments = "-s -t 00";
+        Process.Start(startInfo);
     }
     public void NoButton2()
     {
